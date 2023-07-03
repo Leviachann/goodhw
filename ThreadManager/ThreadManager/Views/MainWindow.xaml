@@ -1,0 +1,48 @@
+﻿<Window x:Class="ThreadApp.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:viewModels="clr-namespace:ThreadApp.ViewModels"
+        Title="Thread App" Height="450" Width="600">
+    <Window.DataContext>
+        <viewModels:MainViewModel />
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Label Content="Inactive Threads" HorizontalAlignment="Center" Grid.Row="0" />
+        <ListBox ItemsSource="{Binding InactiveThreads}" SelectedItem="{Binding SelectedThread}" Grid.Row="0">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Name}" />
+                        <TextBlock Text="{Binding Status}" Margin="10,0,0,0" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1">
+            <Button Content="Add Thread" Margin="5" Command="{Binding AddThreadCommand}" />
+            <Button Content="Play" Margin="5" Command="{Binding PlayThreadCommand}" />
+            <Button Content="Pause" Margin="5" Command="{Binding PauseThreadCommand}" />
+            <Button Content="Resume" Margin="5" Command="{Binding ResumeThreadCommand}" />
+            <Button Content="Stop" Margin="5" Command="{Binding StopThreadCommand}" />
+        </StackPanel>
+
+        <Label Content="Processing Threads" HorizontalAlignment="Center" Grid.Row="2" />
+        <ListBox ItemsSource="{Binding ProcessingThreads}" SelectedItem="{Binding SelectedThread}" Grid.Row="2">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Name}" />
+                        <TextBlock Text="{Binding Status}" Margin="10,0,0,0" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</Window>
